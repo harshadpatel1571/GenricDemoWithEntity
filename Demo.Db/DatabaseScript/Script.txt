@@ -1,0 +1,68 @@
+CREATE DATABASE [GenricDemo]
+
+USE [GenricDemo]
+
+CREATE TABLE [dbo].[Employee](
+	[Id] [int] NOT NULL,
+	[EmpId] [varchar](20) NOT NULL,
+	[Name] [varchar](150) NOT NULL,
+	[EmailId] [varchar](150) NOT NULL,
+	[MobileNo] [varchar](12) NULL,
+ CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Student]    Script Date: 23-06-2023 19:48:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Student](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](150) NOT NULL,
+	[MobileNo] [varchar](12) NOT NULL,
+ CONSTRAINT [PK_Student] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StudentCourse]    Script Date: 23-06-2023 19:48:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StudentCourse](
+	[Id] [int] NOT NULL,
+	[CourseName] [varchar](150) NOT NULL,
+	[CourseDate] [datetime] NOT NULL,
+	[StudentId] [int] NOT NULL,
+ CONSTRAINT [PK_StudentCourse] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[Employee] ([Id], [EmpId], [Name], [EmailId], [MobileNo]) VALUES (1, N'Em-001', N'Harshad', N'harshad@gmail.com', N'8128382487')
+GO
+INSERT [dbo].[Employee] ([Id], [EmpId], [Name], [EmailId], [MobileNo]) VALUES (2, N'Em-002', N'Ronak', N'ronak@gmail.com', N'1594632891')
+GO
+INSERT [dbo].[Employee] ([Id], [EmpId], [Name], [EmailId], [MobileNo]) VALUES (3, N'EM-003', N'Soham', N'soham@gmail.com', N'6523591023')
+GO
+INSERT [dbo].[Student] ([Id], [Name], [MobileNo]) VALUES (1, N'Rakesh', N'1593457860')
+GO
+INSERT [dbo].[Student] ([Id], [Name], [MobileNo]) VALUES (2, N'Mohan', N'1493647892')
+GO
+INSERT [dbo].[Student] ([Id], [Name], [MobileNo]) VALUES (3, N'Rashmi Update', N'1122334455')
+GO
+INSERT [dbo].[StudentCourse] ([Id], [CourseName], [CourseDate], [StudentId]) VALUES (1, N'React', CAST(N'2023-06-23T00:00:00.000' AS DateTime), 1)
+GO
+INSERT [dbo].[StudentCourse] ([Id], [CourseName], [CourseDate], [StudentId]) VALUES (2, N'.Net Core 7', CAST(N'2023-05-05T00:00:00.000' AS DateTime), 2)
+GO
+ALTER TABLE [dbo].[StudentCourse]  WITH CHECK ADD  CONSTRAINT [FK_StudentCourse_Student] FOREIGN KEY([Id])
+REFERENCES [dbo].[Student] ([Id])
+GO
+ALTER TABLE [dbo].[StudentCourse] CHECK CONSTRAINT [FK_StudentCourse_Student]
+GO
